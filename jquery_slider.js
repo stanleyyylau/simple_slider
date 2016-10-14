@@ -1,11 +1,3 @@
-// Your HTML should be like this
-//
-//.slider-viewport
-//  .slides-container
-//    .slides
-//			.slider-back
-//			.slider-forward
-
 ;(function($) {
 
 	$.fn.slider = function( options ) {
