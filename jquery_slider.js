@@ -139,7 +139,3 @@
 	};
 
 }(jQuery));
-
-
-// http://codepen.io/stanleyyylau/pen/QKxEpR
-// How to use
