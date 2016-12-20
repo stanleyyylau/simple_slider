@@ -1,3 +1,11 @@
+// HTML structure
+//
+//.slider-viewport
+//  .slides-container
+//    .slides
+//			.slider-back
+//			.slider-forward
+
 ;(function($) {
 
 	$.fn.slider = function( options ) {
@@ -15,6 +23,7 @@
       currentSlide: 0,
       totalSlides: 0,
       makeZeroTrue: 0,
+			stop: null,
 
       setUp: function(isResponsive){
         // If you want reponsive slider
@@ -32,6 +41,18 @@
         }
 				$('.slides').css('width', viewportWidth+'px');
         $('.slider-viewport').css('width', viewportWidth+'px');
+				$('.slider-viewport').hover(function(){
+					slider.stop = true;
+				});
+				$('.slider-back').hover(function(){
+					slider.stop = true;
+				})
+				$('.slider-forward').hover(function(){
+					slider.stop = true;
+				})
+				$('.slider-viewport').mouseout(function(){
+					slider.stop = false;
+				});
         $('.slides-container').css('width', containerWidth+'px');
         $('.slider-back').click(function() { slider.slide('back'); });
         $('.slider-forward').click(function() { slider.slide('forward'); });
@@ -82,19 +103,7 @@
           var init = (new Date()).getTime(); //start time
           var disp = positionNumberPositive - currentTransitionNumberPositive;
           var time = 500;
-            transitionInterval = setInterval(function(){
-              var instance = (new Date()).getTime() - init; //animating time
-              if(instance <= time ) { //0 -> time seconds
-                  var pos = currentTransitionNumberPositive + Math.floor(disp * instance / time);
-                  var position = '-' + pos +'px';
-                  $('.slides-container').css('left',position);
-              }else {
-                  var position = '-' + positionNumberPositive +'px';
-                  $('.slides-container').css('left',position); //safety side
-                  clearInterval(transitionInterval);
-              }
-
-            },1);
+					$('.slides-container').animate({left:'-'+positionNumberPositive},500)
         }
 
         slider.currentSlide = index;
@@ -107,6 +116,9 @@
 
       playPerSecond: function(num){
         setInterval(function(){
+					if(slider.stop){
+						return;
+					}
           slider.slide('forward');
         },num)
       },
@@ -139,3 +151,7 @@
 	};
 
 }(jQuery));
+
+
+// http://codepen.io/stanleyyylau/pen/QKxEpR
+// How to use
