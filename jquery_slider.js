@@ -41,16 +41,16 @@
         }
 				$('.slides').css('width', viewportWidth+'px');
         $('.slider-viewport').css('width', viewportWidth+'px');
-				$('.slider-viewport').hover(function(){
-					slider.stop = true;
-				});
 				$('.slider-back').hover(function(){
 					slider.stop = true;
 				})
 				$('.slider-forward').hover(function(){
 					slider.stop = true;
 				})
-				$('.slider-viewport').mouseout(function(){
+				$('.slider-back').mouseout(function(){
+					slider.stop = false;
+				});
+				$('.slider-forward').mouseout(function(){
 					slider.stop = false;
 				});
         $('.slides-container').css('width', containerWidth+'px');
